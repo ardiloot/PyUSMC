@@ -4,7 +4,5 @@
 
 ![8SMC1-USBhF-B2-2MC](http://standa.lt/images/graphics/1244641848.jpg)
 
-This is a wrapper module to control Standa 8SMC1-USBhF stepper motor
-controllers ([http://www.standa.lt/products/catalog/motorised_positioners?item=175])
-from Python. The module requires C/C++ developement package ([MicroSMC](http://www.standa.lt/files/usb/MicroSMC.zip)) to be
-installed and USMCDLL.dll in path.
+This is a wrapper module to use Standa [8SMC1-USBhF](http://www.standa.lt/products/catalog/motorised_positioners?item=175) stepper motor controllers
+from Python. The module requires C/C++ developement package ([MicroSMC](http://www.standa.lt/files/usb/MicroSMC.zip)) to be installed and USMCDLL.dll in path.
