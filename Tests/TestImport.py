@@ -1,9 +1,9 @@
 import pytest
 
 def test_Import():
-    from PyUSMC import Motors
+    from PyUSMC import StepperMotorController
     try:
-        motors = Motors()
+        controller = StepperMotorController()
     except OSError:
         pass
     
