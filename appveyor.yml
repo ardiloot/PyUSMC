@@ -28,12 +28,14 @@ install:
   - cmd: activate test-environment
   - cmd: pip install -r requirements.txt
   - cmd: pip install twine
+  - cmd: pip install nose
+  - cmd: pip install pytest
 
 build_script:
   - cmd: python setup.py build install
 
 test_script:
-  - cmd: nosetests -v -w tests
+  - cmd: nosetests -v -w Tests
   - cmd: python setup.py sdist
 
 artifacts:
