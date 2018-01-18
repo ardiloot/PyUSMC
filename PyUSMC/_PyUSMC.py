@@ -47,7 +47,7 @@ class _SettingsBase(Structure):
     def __init__(self, motor):
         self._motor = motor
         self._controller = motor._controller
-        self._dll = motor.dll
+        self._dll = motor._dll
         Structure.__init__(self)
         
         self.Refresh()
@@ -71,7 +71,7 @@ class _SettingsBase(Structure):
         
         """
         allowedKeys, _ = zip(*self._fields_)
-        for key, value in kwargs.iteritems():
+        for key, value in kwargs.items():
             if not key in allowedKeys:
                 raise Exception("No such key %s in %s" % (key, self))
             self.__setattr__(key, value)
@@ -389,10 +389,7 @@ class _StageBaseClass:
             Maximum speed (ticks/second).
         
         """
-        return self.maxSpeed / self.motor.startParameters.SDivisor
-
-
-
+        return self.maxSpeed / self._motor.startParameters.SDivisor
 
 class RotationalStage(_StageBaseClass):
     """This class helps to convert the angle of the rotational stage to the
@@ -446,7 +443,7 @@ class RotationalStage(_StageBaseClass):
             Speed in ticks per second.
         
         """
-        res = float(self.ToUSMCPos(angularSpeed)) / 8.0 * self.motor.startParameters.SDivisor
+        res = float(self.ToUSMCPos(angularSpeed)) / 8.0 * self._motor.startParameters.SDivisor
         return res
 
     def FromUSMCPos(self, value):
@@ -558,7 +555,7 @@ class StepperMotorController:
         """This method blocks until all motors are stopped.
         
         """
-        for m in self.motor:
+        for m in self.motors:
             m.WaitToStop()
 
     def StopMotors(self, powerOff = False):
@@ -571,7 +568,7 @@ class StepperMotorController:
             stopping. By default False.
         
         """
-        for m in self.motor:
+        for m in self.motors:
             m.Stop(powerOff)
             
     def Running(self):
@@ -583,7 +580,7 @@ class StepperMotorController:
             True if at least one motor is moving.
         
         """
-        for m in self.motor:
+        for m in self.motors:
             if m.state.Running():
                 return True
         return False
@@ -622,7 +619,7 @@ class Motor:
     
     """
     def __init__(self, controller, index):
-        self._dll = controller.dll
+        self._dll = controller._dll
         self._controller = controller
         self._index = index
         self.position = RotationalStage(self)
@@ -646,6 +643,8 @@ class Motor:
         """
         errCode = self._dll.USMC_SetCurrentPosition(self.index, self.position.ToUSMCPos(curPos))
         self._controller.ProcessErrorCode(errCode)
+        print("Current to set", self.position.ToUSMCPos(curPos))
+        print("State", self.state.Get("CurPos"))
 
     def Start(self, destPos, speed = None):
         """Moves the stepper motor to `destPos` with speed `speed`. The method

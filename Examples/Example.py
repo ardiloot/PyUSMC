@@ -53,8 +53,8 @@ if __name__ == "__main__":
         motor.mode.PowerOn()
     
     # Helper variables
-    m1 = controller.motor[0]
-    m2 = controller.motor[1]
+    m1 = controller.motors[0]
+    m2 = controller.motors[1]
     
     # Move first motor by +10 degrees
     print("Current position of motor 1", m1.GetPos())
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # Set current position of the motor 2 to zero and then move the motor to
     # angle 30 deg
     print("Initial position of motor 2", m2.GetPos())
-    m2.SetCurrentPosition(0.0)
+    m2.SetCurrentPosition(15.0)
     print("New position of motor 2", m2.GetPos())
     m2.Start(30.0)
     m2.WaitToStop()
