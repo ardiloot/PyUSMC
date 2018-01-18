@@ -1,4 +1,4 @@
 include LICENSE
 include README.md
 recursive-include Examples *.py
-recursive-include tests *.py
+recursive-include Tests *.py
