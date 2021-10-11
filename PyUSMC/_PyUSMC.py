@@ -489,10 +489,10 @@ class StepperMotorController:
         # DLL
         self._dll = WinDLL(r"USMCDLL.dll")
         
-        self._dll.USMC_Init.argtypes = [USMC_Devices]
+        self._dll.USMC_Init.argtypes = [POINTER(USMC_Devices)]
         self._dll.USMC_Init.restype = wintypes.DWORD
         
-        self._dll.USMC_GetState.argtypes = [wintypes.DWORD, USMC_State]
+        self._dll.USMC_GetState.argtypes = [wintypes.DWORD, POINTER(USMC_State)]
         self._dll.USMC_GetState.restype = wintypes.DWORD
         
         self._dll.USMC_SaveParametersToFlash.argtypes = [wintypes.DWORD]
@@ -501,22 +501,22 @@ class StepperMotorController:
         self._dll.USMC_SetCurrentPosition.argtypes = [wintypes.DWORD, c_int]
         self._dll.USMC_SetCurrentPosition.restype = wintypes.DWORD
         
-        self._dll.USMC_GetMode.argtypes = [wintypes.DWORD, USMC_Mode]
+        self._dll.USMC_GetMode.argtypes = [wintypes.DWORD, POINTER(USMC_Mode)]
         self._dll.USMC_GetMode.restype = wintypes.DWORD
         
-        self._dll.USMC_SetMode.argtypes = [wintypes.DWORD, USMC_Mode]
+        self._dll.USMC_SetMode.argtypes = [wintypes.DWORD, POINTER(USMC_Mode)]
         self._dll.USMC_SetMode.restype = wintypes.DWORD
         
-        self._dll.USMC_GetParameters.argtypes = [wintypes.DWORD, USMC_Parameters]
+        self._dll.USMC_GetParameters.argtypes = [wintypes.DWORD, POINTER(USMC_Parameters)]
         self._dll.USMC_GetParameters.restype = wintypes.DWORD
         
-        self._dll.USMC_SetParameters.argtypes = [wintypes.DWORD, USMC_Parameters]
+        self._dll.USMC_SetParameters.argtypes = [wintypes.DWORD, POINTER(USMC_Parameters)]
         self._dll.USMC_SetParameters.restype = wintypes.DWORD
         
-        self._dll.USMC_GetStartParameters.argtypes = [wintypes.DWORD, USMC_StartParameters]
+        self._dll.USMC_GetStartParameters.argtypes = [wintypes.DWORD, POINTER(USMC_StartParameters)]
         self._dll.USMC_GetStartParameters.restype = wintypes.DWORD
         
-        self._dll.USMC_Start.argtypes = [wintypes.DWORD, c_int, POINTER(c_float), USMC_StartParameters]
+        self._dll.USMC_Start.argtypes = [wintypes.DWORD, c_int, POINTER(c_float), POINTER(USMC_StartParameters)]
         self._dll.USMC_Start.restype = wintypes.DWORD
         
         self._dll.USMC_Stop.argtypes = [wintypes.DWORD]
@@ -527,7 +527,7 @@ class StepperMotorController:
         self._dll.USMC_Close.argtypes = []
         self._dll.USMC_Close.restype = wintypes.DWORD
         
-        self._dll.USMC_GetEncoderState.argtypes = [wintypes.DWORD, USMC_EncoderState]
+        self._dll.USMC_GetEncoderState.argtypes = [wintypes.DWORD, POINTER(USMC_EncoderState)]
         self._dll.USMC_GetEncoderState.restype = wintypes.DWORD
         
     def Init(self):
